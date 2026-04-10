@@ -1,0 +1,392 @@
+:root {
+  color-scheme: light;
+  --ink: #141414;
+  --muted: #5d6265;
+  --paper: #fbfbf8;
+  --surface: #ffffff;
+  --line: #d9ddd8;
+  --red: #d7322d;
+  --teal: #007f84;
+  --yellow: #ffd43a;
+  --green: #4f7d39;
+  --shadow: 0 18px 50px rgba(20, 20, 20, 0.16);
+  font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html {
+  min-height: 100%;
+}
+
+body {
+  min-height: 100%;
+  margin: 0;
+  color: var(--ink);
+  background:
+    linear-gradient(90deg, rgba(215, 50, 45, 0.08), rgba(0, 127, 132, 0.08)),
+    var(--paper);
+}
+
+button,
+input {
+  font: inherit;
+}
+
+button {
+  cursor: pointer;
+}
+
+button:disabled {
+  cursor: not-allowed;
+  opacity: 0.48;
+}
+
+.sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+}
+
+.app {
+  width: min(1100px, 100%);
+  min-height: 100vh;
+  margin: 0 auto;
+  padding: 18px;
+}
+
+.app-header {
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+  gap: 18px;
+  padding: 10px 0 20px;
+}
+
+.eyebrow,
+.counter,
+.participant-kicker,
+.question-label,
+.tap-hint {
+  margin: 0;
+  color: var(--muted);
+  font-size: 0.78rem;
+  font-weight: 800;
+  letter-spacing: 0;
+  text-transform: uppercase;
+}
+
+h1 {
+  max-width: 12ch;
+  margin: 5px 0 0;
+  font-size: clamp(2rem, 2.7rem, 3rem);
+  line-height: 0.95;
+  letter-spacing: 0;
+}
+
+.counter {
+  flex: 0 0 auto;
+  padding: 9px 11px;
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  background: var(--surface);
+}
+
+.app-main {
+  display: grid;
+  gap: 18px;
+}
+
+.card-stage {
+  position: relative;
+  display: grid;
+  grid-template-columns: minmax(0, 1fr);
+  align-items: center;
+  gap: 12px;
+}
+
+.flash-card {
+  position: relative;
+  display: block;
+  width: min(100%, 440px);
+  height: min(68vh, 620px);
+  min-height: 480px;
+  margin: 0 auto;
+  padding: 0;
+  border: 0;
+  border-radius: 8px;
+  background: transparent;
+  perspective: 1200px;
+}
+
+.card-face {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  border: 1px solid #202020;
+  border-radius: 8px;
+  background: var(--surface);
+  box-shadow: var(--shadow);
+  backface-visibility: hidden;
+  transform-style: preserve-3d;
+  transition: transform 240ms ease;
+}
+
+.card-front {
+  justify-content: stretch;
+  transform: rotateY(0);
+}
+
+.card-back {
+  gap: 12px;
+  padding: clamp(22px, 6vw, 34px);
+  text-align: left;
+  transform: rotateY(180deg);
+}
+
+.flash-card.is-flipped .card-front {
+  transform: rotateY(-180deg);
+}
+
+.flash-card.is-flipped .card-back {
+  transform: rotateY(0);
+}
+
+.photo-frame {
+  position: relative;
+  flex: 1 1 auto;
+  min-height: 0;
+  background:
+    linear-gradient(90deg, var(--red), var(--yellow) 48%, var(--teal));
+}
+
+.photo-frame img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.tap-hint {
+  flex: 0 0 auto;
+  padding: 14px 18px;
+  text-align: center;
+  color: var(--ink);
+  background: var(--yellow);
+}
+
+.participant-name {
+  display: block;
+  overflow-wrap: anywhere;
+  font-size: clamp(2rem, 2.45rem, 2.8rem);
+  font-weight: 900;
+  line-height: 0.95;
+}
+
+.participant-title {
+  display: block;
+  color: var(--teal);
+  font-size: 1rem;
+  font-weight: 800;
+  line-height: 1.25;
+}
+
+.participant-bio {
+  display: block;
+  overflow: auto;
+  min-height: 0;
+  color: #303638;
+  font-size: 0.98rem;
+  line-height: 1.55;
+}
+
+.question-block {
+  display: block;
+  margin-top: auto;
+  padding-top: 14px;
+  border-top: 3px solid var(--red);
+}
+
+.question-label {
+  display: block;
+  color: var(--green);
+}
+
+.question-text {
+  display: block;
+  margin-top: 5px;
+  font-size: clamp(1.12rem, 1.24rem, 1.35rem);
+  font-weight: 850;
+  line-height: 1.25;
+}
+
+.nav-button,
+.action-button,
+.participant-option {
+  min-height: 44px;
+  border: 1px solid var(--ink);
+  border-radius: 8px;
+  color: var(--ink);
+  background: var(--surface);
+  font-weight: 850;
+}
+
+.nav-button {
+  position: absolute;
+  z-index: 3;
+  top: 50%;
+  width: 64px;
+  transform: translateY(-50%);
+}
+
+.nav-button-left {
+  left: 0;
+}
+
+.nav-button-right {
+  right: 0;
+}
+
+.actions {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 10px;
+  width: min(100%, 440px);
+  margin: 0 auto;
+}
+
+.action-button {
+  padding: 12px 14px;
+}
+
+.primary-action {
+  color: #ffffff;
+  background: var(--red);
+}
+
+.participant-picker {
+  width: min(100%, 720px);
+  margin: 6px auto 0;
+}
+
+.search-label {
+  display: grid;
+  gap: 8px;
+  color: var(--muted);
+  font-size: 0.85rem;
+  font-weight: 800;
+}
+
+.search-label input {
+  width: 100%;
+  min-height: 46px;
+  border: 1px solid var(--ink);
+  border-radius: 8px;
+  padding: 0 13px;
+  color: var(--ink);
+  background: var(--surface);
+}
+
+.participant-list {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+  gap: 10px;
+  margin-top: 12px;
+}
+
+.participant-option {
+  padding: 12px;
+  text-align: left;
+}
+
+.participant-option.is-active {
+  color: #ffffff;
+  background: var(--teal);
+}
+
+.participant-option span {
+  display: block;
+  overflow-wrap: anywhere;
+}
+
+.participant-option small {
+  display: block;
+  margin-top: 3px;
+  color: inherit;
+  font-size: 0.78rem;
+  font-weight: 650;
+  line-height: 1.25;
+  opacity: 0.78;
+}
+
+.empty-state {
+  padding: 20px;
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  background: var(--surface);
+  font-weight: 800;
+  line-height: 1.45;
+}
+
+@media (max-width: 720px) {
+  .app {
+    padding: 14px;
+  }
+
+  .app-header {
+    align-items: flex-start;
+  }
+
+  h1 {
+    font-size: 2.15rem;
+  }
+
+  .card-stage {
+    padding: 0;
+  }
+
+  .flash-card {
+    width: 100%;
+    height: 64vh;
+    min-height: 430px;
+  }
+
+  .nav-button {
+    position: static;
+    width: 100%;
+    transform: none;
+  }
+
+  .nav-button-left {
+    order: 2;
+  }
+
+  .flash-card {
+    order: 1;
+  }
+
+  .nav-button-right {
+    order: 3;
+  }
+
+  .card-stage {
+    grid-template-columns: 1fr 1fr;
+  }
+
+  .flash-card {
+    grid-column: 1 / -1;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .card-face {
+    transition: none;
+  }
+}
