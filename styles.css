@@ -8,7 +8,7 @@
   --red: #d7322d;
   --teal: #007f84;
   --yellow: #ffd43a;
-  --green: #4f7d39;
+  --green: #2e8f4d;
   --shadow: 0 18px 50px rgba(20, 20, 20, 0.16);
   font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
 }
@@ -68,6 +68,11 @@ button:disabled {
   padding: 10px 0 20px;
 }
 
+.header-stats {
+  display: grid;
+  gap: 8px;
+}
+
 .eyebrow,
 .counter,
 .participant-kicker,
@@ -82,7 +87,7 @@ button:disabled {
 }
 
 h1 {
-  max-width: 12ch;
+  max-width: 14ch;
   margin: 5px 0 0;
   font-size: clamp(2rem, 2.7rem, 3rem);
   line-height: 0.95;
@@ -90,11 +95,14 @@ h1 {
 }
 
 .counter {
-  flex: 0 0 auto;
   padding: 9px 11px;
   border: 1px solid var(--line);
   border-radius: 8px;
   background: var(--surface);
+}
+
+.counter-spoken {
+  color: var(--green);
 }
 
 .app-main {
@@ -172,6 +180,19 @@ h1 {
   width: 100%;
   height: 100%;
   object-fit: cover;
+}
+
+.spoken-badge {
+  position: absolute;
+  top: 12px;
+  right: 12px;
+  padding: 8px 10px;
+  border-radius: 8px;
+  color: #ffffff;
+  background: rgba(46, 143, 77, 0.96);
+  font-size: 0.78rem;
+  font-weight: 900;
+  line-height: 1;
 }
 
 .tap-hint {
@@ -271,6 +292,11 @@ h1 {
   background: var(--red);
 }
 
+.accent-action {
+  color: #ffffff;
+  background: var(--green);
+}
+
 .participant-picker {
   width: min(100%, 720px);
   margin: 6px auto 0;
@@ -296,34 +322,45 @@ h1 {
 
 .participant-list {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+  grid-template-columns: repeat(auto-fit, minmax(80px, 1fr));
   gap: 10px;
   margin-top: 12px;
 }
 
 .participant-option {
-  padding: 12px;
-  text-align: left;
+  position: relative;
+  padding: 0;
+  overflow: hidden;
+  aspect-ratio: 1 / 1;
+}
+
+.participant-option img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
 }
 
 .participant-option.is-active {
+  outline: 4px solid var(--teal);
+  outline-offset: 0;
+}
+
+.participant-option.is-spoken::after {
+  content: "✓";
+  position: absolute;
+  right: 6px;
+  bottom: 6px;
+  display: grid;
+  place-items: center;
+  width: 24px;
+  height: 24px;
+  border-radius: 999px;
   color: #ffffff;
-  background: var(--teal);
-}
-
-.participant-option span {
-  display: block;
-  overflow-wrap: anywhere;
-}
-
-.participant-option small {
-  display: block;
-  margin-top: 3px;
-  color: inherit;
-  font-size: 0.78rem;
-  font-weight: 650;
-  line-height: 1.25;
-  opacity: 0.78;
+  background: var(--green);
+  font-size: 0.95rem;
+  font-weight: 900;
+  box-shadow: 0 8px 14px rgba(0, 0, 0, 0.22);
 }
 
 .empty-state {
@@ -342,10 +379,16 @@ h1 {
 
   .app-header {
     align-items: flex-start;
+    flex-direction: column;
   }
 
   h1 {
     font-size: 2.15rem;
+  }
+
+  .header-stats {
+    width: 100%;
+    grid-template-columns: 1fr 1fr;
   }
 
   .card-stage {
