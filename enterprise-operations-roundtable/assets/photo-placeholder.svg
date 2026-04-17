@@ -1,0 +1,12 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 900 1200" role="img" aria-labelledby="title desc">
+  <title id="title">Participant photo placeholder</title>
+  <desc id="desc">A graphic placeholder for a participant photo.</desc>
+  <rect width="900" height="1200" fill="#f8f8f4"/>
+  <rect y="0" width="900" height="1200" fill="#ffffff"/>
+  <rect y="0" width="900" height="1200" fill="none" stroke="#141414" stroke-width="28"/>
+  <path d="M0 100 H900" stroke="#d7322d" stroke-width="80"/>
+  <path d="M0 1100 H900" stroke="#007f84" stroke-width="80"/>
+  <circle cx="450" cy="452" r="168" fill="#ffd43a" stroke="#141414" stroke-width="20"/>
+  <path d="M192 905c34-182 136-274 258-274s224 92 258 274" fill="#4f7d39" stroke="#141414" stroke-width="20" stroke-linejoin="round"/>
+  <text x="450" y="1034" text-anchor="middle" font-family="Arial, sans-serif" font-size="54" font-weight="800" fill="#141414">PHOTO</text>
+</svg>

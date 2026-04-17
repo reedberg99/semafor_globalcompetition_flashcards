@@ -1,5 +1,6 @@
 (function () {
   const PLACEHOLDER_PHOTO = "assets/photo-placeholder.svg";
+  const STORAGE_KEY = "enterprise-operations-roundtable-spoken";
   const participants = Array.isArray(window.PARTICIPANTS) ? window.PARTICIPANTS : [];
   const questions = window.QUESTIONS && typeof window.QUESTIONS === "object" ? window.QUESTIONS : {};
 
@@ -7,10 +8,12 @@
     index: 0,
     filteredIds: participants.map((participant) => participant.id),
     flipped: false,
+    spokenIds: loadSpokenIds(),
   };
 
   const elements = {
     counter: document.querySelector("#cardCounter"),
+    spokenCounter: document.querySelector("#spokenCounter"),
     card: document.querySelector("#flashCard"),
     photo: document.querySelector("#participantPhoto"),
     name: document.querySelector("#participantName"),
@@ -24,7 +27,28 @@
     next: document.querySelector("#nextCard"),
     flip: document.querySelector("#flipButton"),
     shuffle: document.querySelector("#shuffleButton"),
+    spoken: document.querySelector("#spokenButton"),
+    reset: document.querySelector("#resetChecksButton"),
+    frontSpokenBadge: document.querySelector("#frontSpokenBadge"),
   };
+
+  function loadSpokenIds() {
+    try {
+      const raw = window.localStorage.getItem(STORAGE_KEY);
+      const parsed = raw ? JSON.parse(raw) : [];
+      return new Set(Array.isArray(parsed) ? parsed : []);
+    } catch (error) {
+      return new Set();
+    }
+  }
+
+  function persistSpokenIds() {
+    try {
+      window.localStorage.setItem(STORAGE_KEY, JSON.stringify(Array.from(state.spokenIds)));
+    } catch (error) {
+      // Ignore storage issues and keep the UI working.
+    }
+  }
 
   function getVisibleParticipants() {
     const ids = new Set(state.filteredIds);
@@ -40,10 +64,29 @@
     return questions[participant.id] || participant.question || "Question to add.";
   }
 
+  function isSpoken(participant) {
+    return Boolean(participant && state.spokenIds.has(participant.id));
+  }
+
   function setFlipped(flipped) {
     state.flipped = flipped;
     elements.card.classList.toggle("is-flipped", flipped);
     elements.card.setAttribute("aria-pressed", String(flipped));
+  }
+
+  function updateSpokenUi(participant) {
+    const spokenCount = participants.filter((item) => state.spokenIds.has(item.id)).length;
+    elements.spokenCounter.textContent = `${spokenCount} called on`;
+
+    if (!participant) {
+      elements.spoken.textContent = "Mark Called On";
+      elements.frontSpokenBadge.hidden = true;
+      return;
+    }
+
+    const spoken = isSpoken(participant);
+    elements.spoken.textContent = spoken ? "Unmark Called On" : "Mark Called On";
+    elements.frontSpokenBadge.hidden = !spoken;
   }
 
   function renderCard() {
@@ -52,17 +95,20 @@
 
     if (!participant) {
       elements.counter.textContent = "0 of 0";
-      elements.name.textContent = "Participant data needed";
+      elements.name.textContent = "Guest data needed";
       elements.title.textContent = "Add names, titles, bios, and photos in data/participants.js.";
-      elements.bio.textContent = "Once the deck is shared or exported, these cards can be filled in from it.";
+      elements.bio.textContent = "Once the roundtable briefing is parsed, these cards can be filled in from it.";
       elements.question.textContent = "Questions will live in data/questions.js.";
-      elements.summary.textContent = "Participant data needed.";
+      elements.summary.textContent = "Guest data needed.";
       elements.photo.src = PLACEHOLDER_PHOTO;
       elements.photo.alt = "";
       elements.prev.disabled = true;
       elements.next.disabled = true;
       elements.flip.disabled = true;
       elements.shuffle.disabled = true;
+      elements.spoken.disabled = true;
+      elements.reset.disabled = true;
+      updateSpokenUi(null);
       renderList();
       return;
     }
@@ -80,6 +126,9 @@
     elements.next.disabled = visible.length <= 1;
     elements.flip.disabled = false;
     elements.shuffle.disabled = visible.length <= 1;
+    elements.spoken.disabled = false;
+    elements.reset.disabled = state.spokenIds.size === 0;
+    updateSpokenUi(participant);
     renderList();
   }
 
@@ -89,21 +138,24 @@
     const matches = participants.filter((participant) => visibleIds.has(participant.id));
 
     if (!participants.length) {
-      elements.list.innerHTML = '<div class="empty-state">Add participant records in data/participants.js.</div>';
+      elements.list.innerHTML = '<div class="empty-state">Add guest records in data/participants.js.</div>';
       return;
     }
 
     if (!matches.length) {
-      elements.list.innerHTML = '<div class="empty-state">No matching participants.</div>';
+      elements.list.innerHTML = '<div class="empty-state">No matching guests.</div>';
       return;
     }
 
     elements.list.innerHTML = "";
     matches.forEach((participant, visibleIndex) => {
       const button = document.createElement("button");
+      const spoken = isSpoken(participant);
       button.type = "button";
-      button.className = `participant-option${active && active.id === participant.id ? " is-active" : ""}`;
-      button.innerHTML = `<span>${escapeHtml(participant.name || "Name needed")}</span><small>${escapeHtml(participant.title || "Title needed")}</small>`;
+      button.className = `participant-option${active && active.id === participant.id ? " is-active" : ""}${spoken ? " is-spoken" : ""}`;
+      button.setAttribute("aria-label", `${participant.name || "Guest"}${spoken ? ", already called on" : ""}`);
+      button.title = `${participant.name || "Guest"}${participant.title ? ` - ${participant.title}` : ""}`;
+      button.innerHTML = `<img src="${escapeHtml(participant.photo || PLACEHOLDER_PHOTO)}" alt="">`;
       button.addEventListener("click", () => {
         state.index = visibleIndex;
         setFlipped(false);
@@ -150,6 +202,20 @@
     renderCard();
   }
 
+  function toggleSpoken() {
+    const participant = getActiveParticipant();
+    if (!participant) {
+      return;
+    }
+    if (state.spokenIds.has(participant.id)) {
+      state.spokenIds.delete(participant.id);
+    } else {
+      state.spokenIds.add(participant.id);
+    }
+    persistSpokenIds();
+    renderCard();
+  }
+
   elements.card.addEventListener("click", () => {
     if (!participants.length) {
       return;
@@ -165,6 +231,12 @@
   elements.prev.addEventListener("click", () => move(-1));
   elements.next.addEventListener("click", () => move(1));
   elements.search.addEventListener("input", (event) => searchParticipants(event.target.value));
+  elements.spoken.addEventListener("click", toggleSpoken);
+  elements.reset.addEventListener("click", () => {
+    state.spokenIds.clear();
+    persistSpokenIds();
+    renderCard();
+  });
   elements.photo.addEventListener("error", () => {
     if (elements.photo.src.includes(PLACEHOLDER_PHOTO)) {
       return;

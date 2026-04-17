@@ -3,66 +3,60 @@
   <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Enterprise Operations Roundtable Cards</title>
+    <title>Participant Cards</title>
     <link rel="stylesheet" href="styles.css">
   </head>
   <body>
     <div class="app">
       <header class="app-header">
         <div>
-          <p class="eyebrow">Semafor Roundtable Lunch</p>
-          <h1>Enterprise Operations Cards</h1>
+          <p class="eyebrow">Semafor Discussion</p>
+          <h1>Participant Cards</h1>
         </div>
-        <div class="header-stats">
-          <p class="counter" id="cardCounter">0 of 0</p>
-          <p class="counter counter-spoken" id="spokenCounter">0 called on</p>
-        </div>
+        <p class="counter" id="cardCounter">0 of 0</p>
       </header>
 
       <main class="app-main">
-        <section class="card-stage" aria-label="Guest flash card">
-          <button class="nav-button nav-button-left" type="button" id="prevCard" aria-label="Previous guest">
+        <section class="card-stage" aria-label="Participant flash card">
+          <button class="nav-button nav-button-left" type="button" id="prevCard" aria-label="Previous participant">
             Prev
           </button>
 
-          <button class="flash-card" type="button" id="flashCard" aria-label="Flip guest card" aria-describedby="screenReaderSummary" aria-pressed="false">
-            <span class="sr-only" id="screenReaderSummary" aria-live="polite">Guest data needed.</span>
+          <button class="flash-card" type="button" id="flashCard" aria-label="Flip participant card" aria-describedby="screenReaderSummary" aria-pressed="false">
+            <span class="sr-only" id="screenReaderSummary" aria-live="polite">Participant data needed.</span>
             <span class="card-face card-front" aria-hidden="true">
               <span class="photo-frame">
                 <img id="participantPhoto" src="assets/photo-placeholder.svg" alt="">
-                <span class="spoken-badge spoken-badge-front" id="frontSpokenBadge" hidden>Called on</span>
               </span>
               <span class="tap-hint">Tap to flip</span>
             </span>
 
             <span class="card-face card-back" aria-hidden="true">
-              <span class="participant-kicker">Guest</span>
-              <span class="participant-name" id="participantName">Guest needed</span>
+              <span class="participant-kicker">Participant</span>
+              <span class="participant-name" id="participantName">Participant needed</span>
               <span class="participant-title" id="participantTitle">Title needed</span>
-              <span class="participant-bio" id="participantBio">Add the guest bio in data/participants.js.</span>
+              <span class="participant-bio" id="participantBio">Add the participant bio from the deck.</span>
               <span class="question-block">
                 <span class="question-label">Question</span>
-                <span class="question-text" id="participantQuestion">Question needed.</span>
+                <span class="question-text" id="participantQuestion">Question to add.</span>
               </span>
             </span>
           </button>
 
-          <button class="nav-button nav-button-right" type="button" id="nextCard" aria-label="Next guest">
+          <button class="nav-button nav-button-right" type="button" id="nextCard" aria-label="Next participant">
             Next
           </button>
         </section>
 
         <section class="actions" aria-label="Card actions">
           <button class="action-button primary-action" type="button" id="flipButton">Flip Card</button>
-          <button class="action-button accent-action" type="button" id="spokenButton">Mark Called On</button>
           <button class="action-button" type="button" id="shuffleButton">Shuffle</button>
-          <button class="action-button" type="button" id="resetChecksButton">Reset Checks</button>
         </section>
 
-        <section class="participant-picker" aria-label="Guest list">
+        <section class="participant-picker" aria-label="Participant list">
           <label class="search-label" for="participantSearch">
-            <span>Find a guest</span>
-            <input id="participantSearch" type="search" placeholder="Search names, titles, or questions" autocomplete="off">
+            <span>Find a participant</span>
+            <input id="participantSearch" type="search" placeholder="Search names or titles" autocomplete="off">
           </label>
           <div class="participant-list" id="participantList"></div>
         </section>
