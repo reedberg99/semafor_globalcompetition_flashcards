@@ -16,6 +16,22 @@ window.PARTICIPANTS = [
     source: "https://curesearch.org/board-of-directors/"
   },
   {
+    id: "bill-anaya",
+    name: "Bill Anaya",
+    title: "Vice President of Global Government Affairs, Coupang",
+    bio: "Vice president of global government affairs at Coupang. His public profiles describe him as a longtime policy and public affairs executive with prior senior government relations roles at Alibaba Group and Motorola Solutions.",
+    photo: "assets/photos/bill-anaya.jpg",
+    source: "https://theorg.com/org/coupang/org-chart/bill-anaya"
+  },
+  {
+    id: "jane-atherton",
+    name: "Jane Atherton",
+    title: "Head, North America, Temasek",
+    bio: "Head of North America at Temasek. Public executive bios describe her as a New York-based managing director who leads financial services investing efforts in the Americas.",
+    photo: "assets/photos/jane-atherton.jpg",
+    source: "https://theorg.com/org/c2fo/org-chart/jane-atherton"
+  },
+  {
     id: "jason-bordoff",
     name: "Jason Bordoff",
     title: "Founding Director, Center on Global Energy Policy, Columbia University SIPA",
@@ -30,6 +46,14 @@ window.PARTICIPANTS = [
     bio: "Founding partner of Integrum and chairwoman of Teneo. She is the former chair and CEO of Xerox and serves on the MIT Corporation.",
     photo: "https://corporation.mit.edu/files/2017/02/burns-portrait_0.jpg",
     source: "https://corporation.mit.edu/member/ursula-m-burns/"
+  },
+  {
+    id: "ronnie-chatterji",
+    name: "Ronnie Chatterji",
+    title: "Chief Economist, OpenAI",
+    bio: "Chief economist at OpenAI and a Duke professor on leave. He previously served as White House CHIPS coordinator, acting deputy director of the National Economic Council, and chief economist at the U.S. Department of Commerce.",
+    photo: "assets/photos/ronnie-chatterji.avif",
+    source: "https://openai.com/global-affairs/openai-chief-economist-announcement/"
   },
   {
     id: "albert-cheng",
@@ -176,14 +200,6 @@ window.PARTICIPANTS = [
     source: "https://www.forbes.com/profile/matthew-prince/"
   },
   {
-    id: "gina-raimondo",
-    name: "Gina M. Raimondo",
-    title: "Former US Secretary of Commerce",
-    bio: "Former U.S. Secretary of Commerce and former governor of Rhode Island. She is now a distinguished fellow and strategic council co-chair at the Carnegie Endowment for International Peace.",
-    photo: "https://upload.wikimedia.org/wikipedia/commons/thumb/a/ab/Gina_Raimondo.jpg/960px-Gina_Raimondo.jpg",
-    source: "https://carnegieendowment.org/people/gina-raimondo"
-  },
-  {
     id: "cecilia-rouse",
     name: "Cecilia Rouse",
     title: "President, Brookings Institution",
@@ -200,14 +216,6 @@ window.PARTICIPANTS = [
     source: "https://www.nttdata.com/global/en/about-us/leaders/yutaka-sasaki"
   },
   {
-    id: "dilhan-pillay-sandrasegara",
-    name: "Dilhan Pillay Sandrasegara",
-    title: "CEO, Temasek Holdings",
-    bio: "Executive director and CEO of Temasek. He leads the Singapore investment company and appears in Temasek's Ecosperity leadership materials as a sustainability and long-term value voice.",
-    photo: "https://www.ecosperity.sg/content/temasek-ecosperity/en/about-us/_jcr_content/root/responsivegrid/container/imageblockquote/image.coreimg.png/1744632282079/photo-dilhan-pillay.png",
-    source: "https://www.ecosperity.sg/en/about-us"
-  },
-  {
     id: "christy-tanner",
     name: "Christy Tanner",
     title: "CEO & President, New York Public Radio",
@@ -222,6 +230,14 @@ window.PARTICIPANTS = [
     bio: "Palo Alto-based Egon Zehnder consultant who co-leads the firm's global Technology & AI practice, advising companies on talent, transformation, leadership, and board composition.",
     photo: "https://www.egonzehnder.com/cache/public/xconsultant-images-1732019418-14adae2d9d5461fdbc80b4428f8b0736-CROP-700x420.jpg.pagespeed.ic.yr6VNz-q5P.webp",
     source: "https://www.egonzehnder.com/office/palo-alto/consultant/lindsay-trout"
+  },
+  {
+    id: "jing-ulrich",
+    name: "Jing Ulrich",
+    title: "Vice Chairman of Investment Banking, JPMorgan Chase",
+    bio: "Vice chairman of investment banking at JPMorgan Chase and a longtime global markets and China-focused finance executive. She is widely known for advising investors and business leaders on China and cross-border markets.",
+    photo: "assets/photos/jing-ulrich.jpg",
+    source: "https://en.wikipedia.org/wiki/Jing_Ulrich"
   },
   {
     id: "eric-xing",

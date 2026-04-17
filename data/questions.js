@@ -1,8 +1,11 @@
 window.QUESTIONS = {
   "howard-lutnick": "Question to add.",
   "cason-carter": "Question to add.",
+  "bill-anaya": "Question to add.",
+  "jane-atherton": "Question to add.",
   "jason-bordoff": "Question to add.",
   "ursula-burns": "Question to add.",
+  "ronnie-chatterji": "Question to add.",
   "albert-cheng": "Question to add.",
   "jon-clifton": "Question to add.",
   "ziad-dalloul": "Question to add.",
@@ -21,12 +24,11 @@ window.QUESTIONS = {
   "sean-mcgarvey": "Question to add.",
   "salil-parekh": "Question to add.",
   "matthew-prince": "Question to add.",
-  "gina-raimondo": "Question to add.",
   "cecilia-rouse": "Question to add.",
   "yutaka-sasaki": "Question to add.",
-  "dilhan-pillay-sandrasegara": "Question to add.",
   "christy-tanner": "Question to add.",
   "lindsay-trout": "Question to add.",
+  "jing-ulrich": "Question to add.",
   "eric-xing": "Question to add.",
   "strauss-zelnick": "Question to add."
 };
